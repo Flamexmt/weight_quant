@@ -37,7 +37,7 @@ parser.add_argument('--decay', default=1e-4, type=float, help='weight decay')
 parser.add_argument('--number_of_models', default=20, type=int, help='number of independent models to retrain')
 parser.add_argument('--starting_index', default=0, type=int, help='start index for naming models')
 parser.add_argument('--lr', default=1e-2, type=float, help='learning rate for retrain')
-parser.add_argument('--epoch', default=25, type=int, help='num of epochs for retrain')
+parser.add_argument('--epoch', default=5, type=int, help='num of epochs for retrain')
 parser.add_argument('--eval_epoch', default=100, type=int, help='evaluate performance per how many epochs')
 parser.add_argument('--subsample_rate', default=1.0, type=float, help='subsample_rate for retrain')
 parser.add_argument('--compute_gradient', default=False, type=bool, help='compute gradient for retrained model')
@@ -84,7 +84,7 @@ def get_gradient_importance(model, ds_for_importance, valid_ind, is_imagenet):
         if is_imagenet:
             input = torch.from_numpy(input)
             target = torch.from_numpy(target)
-        target = target.cuda(async=True)
+        target = target.cuda()
         input_var = torch.autograd.Variable(input).cuda()
         target_var = torch.autograd.Variable(target).cuda()
 
@@ -130,7 +130,7 @@ def get_hessian_importance(model, ds_for_importance, valid_ind, is_imagenet):
             input = torch.from_numpy(input)
             target = torch.from_numpy(target)
 
-        target = target.cuda(async=True)
+        target = target.cuda()
         input_var = torch.autograd.Variable(input).cuda()
         target_var = torch.autograd.Variable(target).cuda()
 
@@ -175,7 +175,7 @@ def train(train_ds, model, criterion, optimizer, epoch, is_imagenet):
         if is_imagenet:
             input = torch.from_numpy(input)
             target = torch.from_numpy(target)
-        target = target.cuda(async=True)
+        target = target.cuda()
         input_var = torch.autograd.Variable(input).cuda()
         target_var = torch.autograd.Variable(target).cuda()
 

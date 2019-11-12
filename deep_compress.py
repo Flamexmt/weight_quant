@@ -29,7 +29,7 @@ if module_path not in sys.path:
 parser = argparse.ArgumentParser(description='PyTorch SVHN Example')
 parser.add_argument('--type', default='cifar10', help='|'.join(selector.known_models))
 parser.add_argument('--batch_size', type=int, default=10, help='input batch size for training')
-parser.add_argument('--gpu', default=None, help='index of gpus to use')
+parser.add_argument('--gpu', default=0, help='index of gpus to use')
 parser.add_argument('--ngpu', type=int, default=2, help='number of gpus to use')
 parser.add_argument('--seed', type=int, default=117, help='random seed (default: 1)')
 parser.add_argument('--model_root', default='~/.torch/models/', help='folder to save the model')
@@ -67,7 +67,8 @@ parser.add_argument('--output_dims', default=10, type=int, help='output dimensio
 parser.add_argument('--dropout_rate', default=0.2, type=float, help='dropout rate for synthetic model')
 args = parser.parse_args()
 
-args.gpu = misc.auto_select_gpu(utility_bound=0, num_gpu=args.ngpu, selected_gpus=args.gpu)
+# args.gpu = misc.auto_select_gpu(utility_bound=0, num_gpu=args.ngpu, selected_gpus=args.gpu)
+args.gpu='0'
 args.ngpu = len(args.gpu)
 misc.ensure_dir(args.logdir)
 args.model_root = misc.expand_user(args.model_root)
@@ -145,7 +146,7 @@ def train(train_ds, model, criterion, optimizer, epoch, valid_ind, mask_list, is
         if is_imagenet:
             input = torch.from_numpy(input)
             target = torch.from_numpy(target)
-        target = target.cuda(async=True)
+        target = target.cuda()
         input_var = torch.autograd.Variable(input).cuda()
         target_var = torch.autograd.Variable(target).cuda()
 

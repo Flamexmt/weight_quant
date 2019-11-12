@@ -4,7 +4,8 @@ from torchvision import datasets, transforms
 import os
 
 def get(batch_size, data_root='/tmp/public_dataset/pytorch', train=True, val=True, subsample=False, indices=None, **kwargs):
-    data_root = os.path.expanduser(os.path.join(data_root, 'mnist-data'))
+    # data_root = os.path.expanduser(os.path.join(data_root, 'mnist-data'))
+    data_root='D:\Picdataset\minst'
     kwargs.pop('input_size', None)
     num_workers = kwargs.setdefault('num_workers', 1)
     print("Building MNIST data loader with {} workers".format(num_workers))

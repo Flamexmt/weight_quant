@@ -1,0 +1,10 @@
+Building and initializing mnist parameters
+Sequential(
+  (fc1): Linear(in_features=784, out_features=256, bias=True)
+  (relu1): ReLU()
+  (drop1): Dropout(p=0.2, inplace=False)
+  (fc2): Linear(in_features=256, out_features=256, bias=True)
+  (relu2): ReLU()
+  (drop2): Dropout(p=0.2, inplace=False)
+  (out): Linear(in_features=256, out_features=10, bias=True)
+)

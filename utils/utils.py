@@ -92,7 +92,7 @@ def accuracy(output, target, topk=(1,)):
 
 
 # Custom progress bar
-_, term_width = os.popen('stty size', 'r').read().split()
+_, term_width = 200,80
 term_width = int(term_width)
 TOTAL_BAR_LENGTH = 40.
 last_time = time.time()
